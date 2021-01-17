@@ -1,0 +1,66 @@
+{
+  "invocation": "cookie sales",
+  "intents": [
+    {
+      "name": "CookieCountIntent",
+      "phrases": [
+        "sales",
+        "sales report",
+        "how many have I sold",
+        "how many boxes have I sold",
+        "how many cookies have I sold"
+      ]
+    },
+    {
+      "name": "DeliveryStatusIntent",
+      "phrases": [
+        "delivery",
+        "delivery report",
+        "delivery report for {name}",
+        "what needs to be delivered",
+        "how many boxes still need to be delivered",
+        "who hasn't received their cookies"
+      ]
+    }
+  ],
+  "alexa": {
+    "interactionModel": {
+      "languageModel": {
+        "intents": [
+          {
+            "name": "AMAZON.CancelIntent",
+            "samples": []
+          },
+          {
+            "name": "AMAZON.HelpIntent",
+            "samples": []
+          },
+          {
+            "name": "AMAZON.StopIntent",
+            "samples": []
+          }
+        ]
+      }
+    }
+  },
+  "dialogflow": {
+    "intents": [
+      {
+        "name": "Default Fallback Intent",
+        "auto": true,
+        "webhookUsed": true,
+        "fallbackIntent": true
+      },
+      {
+        "name": "Default Welcome Intent",
+        "auto": true,
+        "webhookUsed": true,
+        "events": [
+          {
+            "name": "WELCOME"
+          }
+        ]
+      }
+    ]
+  }
+}
