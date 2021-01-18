@@ -2,7 +2,7 @@
 	"defaultTimezone": "America/New_York",
 	"description": "",
 	"webhook": {
-		"url": "undefined",
+		"url": "https://app.cookieorder.org:8443/webhook",
 		"available": true
 	},
 	"language": "en"

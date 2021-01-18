@@ -7,9 +7,11 @@
     "puppeteer_skip_chromium_download": true
   },
   "dependencies": {
+    "alexa-verifier-middleware": "^1.0.3",
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.5",
     "chrome-aws-lambda": "^5.5.0",
+    "fs": "0.0.1-security",
     "jovo-db-filedb": "^3.0.14",
     "jovo-framework": "^3.3.0",
     "jovo-platform-alexa": "^3.0.15",
