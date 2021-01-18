@@ -9,5 +9,13 @@ module.exports = {
   googleAction: {
     nlu: 'dialogflow',
   },
-  endpoint: '${JOVO_WEBHOOK_URL}',
+  stages: {
+    local: {
+      endpoint: '${JOVO_WEBHOOK_URL}'
+    },
+    dev: {
+      endpoint: 'arn:aws:lambda:us-east-1:230196114227:function:cookie-sales-skill'
+    }
+  },
+  endpoint: 'arn:aws:lambda:us-east-1:230196114227:function:cookie-sales-skill'
 };

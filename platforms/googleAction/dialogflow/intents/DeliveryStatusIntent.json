@@ -1,0 +1,5 @@
+{
+	"name": "DeliveryStatusIntent",
+	"auto": true,
+	"webhookUsed": true
+}

@@ -1,5 +1,5 @@
 {
-  "invocation": "cookie sales",
+  "invocation": "cookie sales report",
   "intents": [
     {
       "name": "CookieCountIntent",
@@ -16,7 +16,6 @@
       "phrases": [
         "delivery",
         "delivery report",
-        "delivery report for {name}",
         "what needs to be delivered",
         "how many boxes still need to be delivered",
         "who hasn't received their cookies"
@@ -33,6 +32,10 @@
           },
           {
             "name": "AMAZON.HelpIntent",
+            "samples": []
+          },
+          {
+            "name": "AMAZON.NavigateHomeIntent",
             "samples": []
           },
           {

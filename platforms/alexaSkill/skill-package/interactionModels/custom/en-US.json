@@ -1,0 +1,46 @@
+{
+	"interactionModel": {
+		"languageModel": {
+			"invocationName": "cookie sales report",
+			"types": [],
+			"intents": [
+				{
+					"name": "CookieCountIntent",
+					"samples": [
+						"sales",
+						"sales report",
+						"how many have I sold",
+						"how many boxes have I sold",
+						"how many cookies have I sold"
+					]
+				},
+				{
+					"name": "DeliveryStatusIntent",
+					"samples": [
+						"delivery",
+						"delivery report",
+						"what needs to be delivered",
+						"how many boxes still need to be delivered",
+						"who hasn't received their cookies"
+					]
+				},
+				{
+					"name": "AMAZON.CancelIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.HelpIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.NavigateHomeIntent",
+					"samples": []
+				},
+				{
+					"name": "AMAZON.StopIntent",
+					"samples": []
+				}
+			]
+		}
+	}
+}
