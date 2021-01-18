@@ -5,19 +5,22 @@ const { Alexa } = require('jovo-platform-alexa');
 const { GoogleAssistant } = require('jovo-platform-googleassistant');
 const { JovoDebugger } = require('jovo-plugin-debugger');
 const { FileDb } = require('jovo-db-filedb');
+const { Log, LogLevel } = require('jovo-core');
 
 const axios = require('axios');
 const cheerio = require('cheerio');
 const md5 = require('md5');
 const puppeteer = require('puppeteer');
-const chromium = require('chrome-aws-lambda');
-const puppeteerLambda = require('puppeteer-lambda');
+
+Log.addFileAppender('errors.log', { logLevel: LogLevel.VERBOSE });
 
 // ------------------------------------------------------------------
 // APP INITIALIZATION
 // ------------------------------------------------------------------
 
 const base_url = 'https://digitalcookie.girlscouts.org/';
+const cookie_image_url = 'https://www.girlscouts.org/content/dam/girlscouts-gsusa/images/Cookies/meet-the-cookies/20_MarComm_MeetTheCookies_Graphics_HybridThinMints.jpg';
+const cookie_images = { smallImageUrl: cookie_image_url, largeImageUrl: cookie_image_url };
 
 let username = '';
 let password = '';
@@ -62,15 +65,17 @@ app.setHandler({
   async CookieCountIntent() {
     await getCookieCounts()
       .then( girls => {
-        let results = [];
+        let results = {show:[],tell:[]};
         if(girls.length) {
           for(var i in girls) {
             var girl = girls[i];
-            results.push(girl.name + ' has sold ' + girl.sold + ' boxes and has ' + girl.to_sell + ' left to reach her goal of ' + girl.goal + '.');
+            results.tell.push(girl.name + ' has sold ' + girl.sold + ' boxes and has ' + girl.to_sell + ' left to reach her goal of ' + girl.goal + '.');
+            results.show.push(girl.name + '\'s goal:  ' + girl.goal + ' boxes\r\n' + girl.sold + ' sold; ' + girl.to_sell + ' left to sell');
           }
 
-          if(results.length) {
-            this.tell(results.join(' '));
+          if(results.show.length) {
+            this.showStandardCard('Sales Results',results.show.join('\r\n\r\n'),cookie_images)
+              .tell(results.tell.join(' '));
           } else {
             this.tell('No results were found. Please try again.');
           }
@@ -130,7 +135,7 @@ function getCookieCounts()
     await page.click('#loginButton');
     console.log('submitting login page');
     try {
-    await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 5000});
+      await page.waitForSelector('#scoutList');
     } catch(e) {
       console.log('Timeout while logging in.');
       return [];
@@ -164,8 +169,6 @@ function getCookieCounts()
       girls[i].to_sell = $('#totalBoxtoSellDisplay').text().trim();
       girls[i].cookiesData = await page.evaluate(() => cookiesData);
     }
-
-    await browser.close();
 
     return girls;
   })();
